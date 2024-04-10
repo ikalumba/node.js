@@ -1,0 +1,30 @@
+{
+  "name": "hello_world",
+  "version": "1.0.0",
+  "description": "This im my Hello world project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "My",
+    "first",
+    "node",
+    "js",
+    "project"
+  ],
+  "author": "Isaac Kalumba",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.0",
+    "path": "^0.12.7",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

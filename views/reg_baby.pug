@@ -1,0 +1,26 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Baby registration
+    link(rel="stylesheet", href="css/reg_baby.css")
+  body
+    p This is my HTML file
+    .main
+      h2 Registration Form
+      form(action='/registerBaby', method='POST')
+        label(for='first') First Name:
+        input#first(type='text', name='first', required='')
+        label(for='last') Last Name:
+        input#last(type='text', name='last', required='')
+        label(for='age') Age:
+        input#age(type='number', name='age', min='18', required='')
+        label(for='gender') Gender:
+        select#gender(name='gender', required='')
+          option(value='male') Male
+          option(value='female') Female
+        label(for='location') Location:
+        input#location(type='text', name='location', required='')
+        button(type='submit') Submit
+        script(src="js/reg_baby.js") 
