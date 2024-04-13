@@ -5,6 +5,9 @@ const path = require("path"); //for pug
 
 require("dotenv").config();
 
+//Importing routes
+const registrationRoutes = require("./routes/registrationRoutes");
+
 // Instantiations;
 const app = express();
 
@@ -32,53 +35,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
+
+// Use imported routes
+app.use("/", registrationRoutes);
+/*
 app.get("/childlist", (req, res) => {
   res.render("myDash");
 });
 
-app.get("/", (req, res) => {
-  res.send("Homepage! Hello world");
+app.get("/registerBaby", (req, res) => {
+  res.render("reg_baby");
 });
-app.get("/about", (req, res) => {
-  res.send("About us page. Nice");
+
+app.get("/login", (req, res) => {
+  res.render("adminLogin");
 });
+*/
 // Syntax of route
 // app.METHOD(PATH, HANDLER);
-app.get("/programs", (req, res) => {
-  res.send("These are our programs");
-});
-
-app.get("/books/:bookId", (req, res) => {
-  res.send(req.params);
-});
-
-// app.get("/student/:studentId", (req, res) => {
-//   res.send("studentId " + req.params.studentId);
-//   console.log("xx" + req.params.studentId);
-// });
-app.get("/student/:studentId", (req, res) => {
-  res.status(200).send("studentId " + req.params.studentId);
-});
-
-app.get("/teacher/:id", (req, res) => {
-  res.send("My teacher's Id number is " + req.params.id);
-});
 
 app.get("/index", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/registerBaby", (req, res) => {
-  res.sendFile(__dirname + "/reg_baby.html");
-});
-
-app.post("/registerBaby", (req, res) => {
-  console.log(req.body);
-  let baby = req.body;
-  // res.redirect("/index");
-  res.json({ message: "baby registered", baby });
-});
-
+/*
 // query params
 app.get("/students", (req, res) => {
   res.send("This is class " + req.query.class + "cohort " + req.query.cohort);
@@ -87,7 +67,7 @@ app.get("/students", (req, res) => {
 app.get("/babies", (req, res) => {
   res.send("This is baby " + req.query.name + "age " + req.query.age);
 });
-
+*/
 // For invalid routes
 app.get("*", (req, res) => {
   res.send("404 Invalid URL");

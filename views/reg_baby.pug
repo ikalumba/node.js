@@ -9,7 +9,7 @@ html(lang='en')
     p This is my HTML file
     .main
       h2 Registration Form
-      form(action='/registerBaby', method='POST')
+      form(action='registerBaby', method='POST')
         label(for='first') First Name:
         input#first(type='text', name='first', required='')
         label(for='last') Last Name:
@@ -23,4 +23,4 @@ html(lang='en')
         label(for='location') Location:
         input#location(type='text', name='location', required='')
         button(type='submit') Submit
-        script(src="js/reg_baby.js") 
+        script(src="js/reg_baby.js")
