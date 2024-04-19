@@ -2,11 +2,28 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path"); //for pug
+const passport = require("passport");
+const expressSession = require("express-session")({
+  secret: "secret",
+  resave: false,
+  saveUninitialized: false,
+});
 
 require("dotenv").config();
 
+// import register model with user details
+const RegisterUser = require("./models/UserRegistration");
+
+const port = 3500;
+
 //Importing routes
 const registrationRoutes = require("./routes/registrationRoutes");
+/*
+const ContactRoutes = require("./routes/contactRoutes");
+*/
+const userRegRoutes = require("./routes/userRegRoutes");
+const authenticationRoutes = require("./routes/authenticationRoutes");
+const exp = require("constants");
 
 // Instantiations;
 const app = express();
@@ -34,10 +51,24 @@ app.use(express.static(path.join(__dirname, "public"))); //set directory for sta
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Express session configurations
+app.use(expressSession);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passpert configs
+passport.use(RegisterUser.createStrategy());
+passport.serializeUser(RegisterUser.serializeUser());
+passport.deserializeUser(RegisterUser.deserializeUser());
 // Routes
 
 // Use imported routes
 app.use("/", registrationRoutes);
+app.use("/", userRegRoutes);
+/*
+app.use("/", ContactRoutes);
+*/
+app.use("/", authenticationRoutes);
 /*
 app.get("/childlist", (req, res) => {
   res.render("myDash");
@@ -74,4 +105,4 @@ app.get("*", (req, res) => {
 });
 
 // Bootstrapping the server
-app.listen(3500, () => console.log("listening on port 3500"));
+app.listen(port, () => console.log(`listening on port ${port}`));
