@@ -1,0 +1,26 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Edit Information Form
+    link(rel='stylesheet', href='/css/editBabies.css')
+  body
+    .form-container
+      h2 Edit Your Information
+      form#editInfoForm(action='/babiesUpdate?id='+baby._id method='POST')
+        label(for='firstName') First Name:
+        input#firstName(type='text', name='first',value=baby.first)
+        label(for='secondName') Second Name:
+        input#secondName(type='text', name='last', value=baby.last)
+        label(for='age') Age:
+        input#age(type='number', name='age', value=baby.age)
+        label(for='gender') Gender:
+        select#gender(name='gender', required='')
+          option(value='') Select...
+          option(value='male' selected=baby.gender==='male') Male
+          option(value='female' selected=baby.gender==='female') Female
+          option(value='other') Other
+        label(for='location') Location:
+        input#location(type='text', name='location', value=baby.location)   
+        input(type='submit', value='Submit')

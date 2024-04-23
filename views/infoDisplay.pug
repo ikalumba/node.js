@@ -24,7 +24,7 @@ html(lang='en')
           td #{baby.gender}
           td #{baby.location}
           td
-           a(href='#') update
+           a(href='/babiesUpdate/'+baby._id) update
           td
             form(method='POST' action='/delete')
              input(type='hidden' name='id' value=baby._id)

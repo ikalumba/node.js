@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Information Form</title>
+    <link rel="stylesheet" href="/public/css/editBabies.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Edit Your Information</h2>
+      <form id="editInfoForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required />
+
+        <label for="secondName">Second Name:</label>
+        <input type="text" id="secondName" name="secondName" required />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required />
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+          <option value="">Select...</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    
+  </body>
+</html>
+
+
+<!-- <script>
+  document.getElementById("editInfoForm").onsubmit = function (event) {
+    event.preventDefault();
+    // Here you can add the code to process the form data
+    alert("Form submitted!");
+  };
+</script> -->

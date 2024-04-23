@@ -46,4 +46,23 @@ router.post("/delete", async (req, res) => {
   }
 });
 
+// Updating a baby in the database
+router.get("/babiesUpdate/:id", async (req, res) => {
+  try {
+    const updateBaby = await Registration.findOne({ _id: req.params.id });
+    res.render("editBabies", { baby: updateBaby });
+  } catch (error) {
+    console.log("Error finding baby", error);
+    res.status(400).sendStatus("unable to find baby from the db");
+  }
+});
+
+router.post("/babiesUpdate", async (req, res) => {
+  try {
+    await Registration.findOneAndUpdate({ _id: req.query.id }, req.body);
+    res.redirect("/babiesList");
+  } catch (error) {
+    res.status(400).sendStatus("unable to update baby in the db");
+  }
+});
 module.exports = router;
