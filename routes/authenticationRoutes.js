@@ -10,7 +10,14 @@ router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
   (req, res) => {
-    res.redirect("/registerBaby");
+    req.session.user = req.user;
+    if (req.user.role === "Admin") {
+      res.redirect("/registerBaby");
+    } else if (req.user.role === "sitter") {
+      res.redirect("/babiesList");
+    } else {
+      ("You're not a registered user");
+    }
   }
 );
 

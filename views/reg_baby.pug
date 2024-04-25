@@ -10,7 +10,7 @@ html(lang='en')
     .main
 
     a.btn-logout(href='/logout' role='button') logout
-      h2 Registration Form
+    h2 Registration Form
       form(action='registerBaby', method='POST')
         label(for='first') First Name:
         input#first(type='text', name='first', required='')
@@ -24,4 +24,10 @@ html(lang='en')
           option(value='female') Female
         label(for='location') Location:
         input#location(type='text', name='location', required='')
+        label(for='email') Email:
+        input#email(type='text', name='email', required='')
+        label(for='') Password:
+        input#password(type='password', name='password', required='')
+        label(for='role') Role:
+        input#role(type='text', name='role', required='')
         button(type='submit') Submit

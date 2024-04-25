@@ -1,31 +1,61 @@
 const express = require("express");
 const router = express.Router();
+const connectEnsureLogin = require("connect-ensure-login");
 
 //import model
-const Registration = require("../models/Registration");
+const Registration = require("../models/UserRegistration");
 
-router.get("/registerBaby", (req, res) => {
+router.get("/registerBaby", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   res.render("reg_baby");
 });
 
-// using the async await button
-router.post("/registerBaby", async (req, res) => {
-  try {
-    const baby = new Registration(req.body);
-    console.log(baby);
-    await baby.save();
-    res.redirect("/registerBaby");
-  } catch (error) {
-    res.status(400).redirect("/babiesList");
-    console.log("Error registering baby", error);
-  }
+// Enabling image upload
+/*
+var storage = multer.diskStorage({
+
+  destination: (req, file, cb) => {
+
+    cb(null, "public/images/uploads");
+
+  },
+
+  filename: (req, file, cb) => {
+
+    cb(null, file.originalname);
+
+  },
+
 });
+
+var upload = multer({ storage: storage });
+*/
+
+// using the async await button
+router.post(
+  "/registerBaby",
+  connectEnsureLogin.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      const baby = new Registration(req.body);
+      console.log(baby);
+      await Registration.register(baby, req.body.password, (err) => {
+        if (err) {
+          throw err;
+        }
+        res.redirect("/babiesList");
+      });
+    } catch (error) {
+      res.status(400).redirect("/babiesList");
+      console.log("Error registering baby", error);
+    }
+  }
+);
 
 // Fetching babies from the database
 
 router.get("/babiesList", async (req, res) => {
   try {
-    let babies = await Registration.find();
+    let babies = await Registration.find({ role: "sitter" });
     res.render("infoDisplay", { babies: babies });
   } catch (error) {
     res.status(400).send("unable to fetch babies");

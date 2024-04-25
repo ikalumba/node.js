@@ -15,6 +15,26 @@ const userRegisterSchema = new Schema({
   },
 
   role: { type: String },
+  first: {
+    type: String,
+    trim: true,
+  },
+  last: {
+    type: String,
+    trim: true,
+  },
+  age: {
+    type: String,
+    trim: true,
+  },
+  gender: {
+    type: String,
+    trim: true,
+  },
+  location: {
+    type: String,
+    trim: true,
+  },
 });
 
 userRegisterSchema.plugin(passportLocalMongoose, {
